@@ -1,0 +1,1633 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 12.8 (Ubuntu 12.8-0ubuntu0.20.04.1)
+-- Dumped by pg_dump version 12.8 (Ubuntu 12.8-0ubuntu0.20.04.1)
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- Name: auth_group; Type: TABLE; Schema: public; Owner: dj_user_books
+--
+
+CREATE TABLE public.auth_group (
+    id integer NOT NULL,
+    name character varying(150) NOT NULL
+);
+
+
+ALTER TABLE public.auth_group OWNER TO dj_user_books;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE; Schema: public; Owner: dj_user_books
+--
+
+CREATE SEQUENCE public.auth_group_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_id_seq OWNER TO dj_user_books;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: dj_user_books
+--
+
+ALTER SEQUENCE public.auth_group_id_seq OWNED BY public.auth_group.id;
+
+
+--
+-- Name: auth_group_permissions; Type: TABLE; Schema: public; Owner: dj_user_books
+--
+
+CREATE TABLE public.auth_group_permissions (
+    id bigint NOT NULL,
+    group_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_group_permissions OWNER TO dj_user_books;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: dj_user_books
+--
+
+CREATE SEQUENCE public.auth_group_permissions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_permissions_id_seq OWNER TO dj_user_books;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: dj_user_books
+--
+
+ALTER SEQUENCE public.auth_group_permissions_id_seq OWNED BY public.auth_group_permissions.id;
+
+
+--
+-- Name: auth_permission; Type: TABLE; Schema: public; Owner: dj_user_books
+--
+
+CREATE TABLE public.auth_permission (
+    id integer NOT NULL,
+    name character varying(255) NOT NULL,
+    content_type_id integer NOT NULL,
+    codename character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.auth_permission OWNER TO dj_user_books;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE; Schema: public; Owner: dj_user_books
+--
+
+CREATE SEQUENCE public.auth_permission_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_permission_id_seq OWNER TO dj_user_books;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: dj_user_books
+--
+
+ALTER SEQUENCE public.auth_permission_id_seq OWNED BY public.auth_permission.id;
+
+
+--
+-- Name: auth_user; Type: TABLE; Schema: public; Owner: dj_user_books
+--
+
+CREATE TABLE public.auth_user (
+    id integer NOT NULL,
+    password character varying(128) NOT NULL,
+    last_login timestamp with time zone,
+    is_superuser boolean NOT NULL,
+    username character varying(150) NOT NULL,
+    first_name character varying(150) NOT NULL,
+    last_name character varying(150) NOT NULL,
+    email character varying(254) NOT NULL,
+    is_staff boolean NOT NULL,
+    is_active boolean NOT NULL,
+    date_joined timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.auth_user OWNER TO dj_user_books;
+
+--
+-- Name: auth_user_groups; Type: TABLE; Schema: public; Owner: dj_user_books
+--
+
+CREATE TABLE public.auth_user_groups (
+    id bigint NOT NULL,
+    user_id integer NOT NULL,
+    group_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_user_groups OWNER TO dj_user_books;
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: dj_user_books
+--
+
+CREATE SEQUENCE public.auth_user_groups_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_groups_id_seq OWNER TO dj_user_books;
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: dj_user_books
+--
+
+ALTER SEQUENCE public.auth_user_groups_id_seq OWNED BY public.auth_user_groups.id;
+
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE; Schema: public; Owner: dj_user_books
+--
+
+CREATE SEQUENCE public.auth_user_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_id_seq OWNER TO dj_user_books;
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: dj_user_books
+--
+
+ALTER SEQUENCE public.auth_user_id_seq OWNED BY public.auth_user.id;
+
+
+--
+-- Name: auth_user_user_permissions; Type: TABLE; Schema: public; Owner: dj_user_books
+--
+
+CREATE TABLE public.auth_user_user_permissions (
+    id bigint NOT NULL,
+    user_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_user_user_permissions OWNER TO dj_user_books;
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: dj_user_books
+--
+
+CREATE SEQUENCE public.auth_user_user_permissions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_user_permissions_id_seq OWNER TO dj_user_books;
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: dj_user_books
+--
+
+ALTER SEQUENCE public.auth_user_user_permissions_id_seq OWNED BY public.auth_user_user_permissions.id;
+
+
+--
+-- Name: django_admin_log; Type: TABLE; Schema: public; Owner: dj_user_books
+--
+
+CREATE TABLE public.django_admin_log (
+    id integer NOT NULL,
+    action_time timestamp with time zone NOT NULL,
+    object_id text,
+    object_repr character varying(200) NOT NULL,
+    action_flag smallint NOT NULL,
+    change_message text NOT NULL,
+    content_type_id integer,
+    user_id integer NOT NULL,
+    CONSTRAINT django_admin_log_action_flag_check CHECK ((action_flag >= 0))
+);
+
+
+ALTER TABLE public.django_admin_log OWNER TO dj_user_books;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE; Schema: public; Owner: dj_user_books
+--
+
+CREATE SEQUENCE public.django_admin_log_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_admin_log_id_seq OWNER TO dj_user_books;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: dj_user_books
+--
+
+ALTER SEQUENCE public.django_admin_log_id_seq OWNED BY public.django_admin_log.id;
+
+
+--
+-- Name: django_content_type; Type: TABLE; Schema: public; Owner: dj_user_books
+--
+
+CREATE TABLE public.django_content_type (
+    id integer NOT NULL,
+    app_label character varying(100) NOT NULL,
+    model character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.django_content_type OWNER TO dj_user_books;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE; Schema: public; Owner: dj_user_books
+--
+
+CREATE SEQUENCE public.django_content_type_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_content_type_id_seq OWNER TO dj_user_books;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: dj_user_books
+--
+
+ALTER SEQUENCE public.django_content_type_id_seq OWNED BY public.django_content_type.id;
+
+
+--
+-- Name: django_migrations; Type: TABLE; Schema: public; Owner: dj_user_books
+--
+
+CREATE TABLE public.django_migrations (
+    id bigint NOT NULL,
+    app character varying(255) NOT NULL,
+    name character varying(255) NOT NULL,
+    applied timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.django_migrations OWNER TO dj_user_books;
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE; Schema: public; Owner: dj_user_books
+--
+
+CREATE SEQUENCE public.django_migrations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_migrations_id_seq OWNER TO dj_user_books;
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: dj_user_books
+--
+
+ALTER SEQUENCE public.django_migrations_id_seq OWNED BY public.django_migrations.id;
+
+
+--
+-- Name: django_session; Type: TABLE; Schema: public; Owner: dj_user_books
+--
+
+CREATE TABLE public.django_session (
+    session_key character varying(40) NOT NULL,
+    session_data text NOT NULL,
+    expire_date timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.django_session OWNER TO dj_user_books;
+
+--
+-- Name: social_auth_association; Type: TABLE; Schema: public; Owner: dj_user_books
+--
+
+CREATE TABLE public.social_auth_association (
+    id integer NOT NULL,
+    server_url character varying(255) NOT NULL,
+    handle character varying(255) NOT NULL,
+    secret character varying(255) NOT NULL,
+    issued integer NOT NULL,
+    lifetime integer NOT NULL,
+    assoc_type character varying(64) NOT NULL
+);
+
+
+ALTER TABLE public.social_auth_association OWNER TO dj_user_books;
+
+--
+-- Name: social_auth_association_id_seq; Type: SEQUENCE; Schema: public; Owner: dj_user_books
+--
+
+CREATE SEQUENCE public.social_auth_association_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.social_auth_association_id_seq OWNER TO dj_user_books;
+
+--
+-- Name: social_auth_association_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: dj_user_books
+--
+
+ALTER SEQUENCE public.social_auth_association_id_seq OWNED BY public.social_auth_association.id;
+
+
+--
+-- Name: social_auth_code; Type: TABLE; Schema: public; Owner: dj_user_books
+--
+
+CREATE TABLE public.social_auth_code (
+    id integer NOT NULL,
+    email character varying(254) NOT NULL,
+    code character varying(32) NOT NULL,
+    verified boolean NOT NULL,
+    "timestamp" timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.social_auth_code OWNER TO dj_user_books;
+
+--
+-- Name: social_auth_code_id_seq; Type: SEQUENCE; Schema: public; Owner: dj_user_books
+--
+
+CREATE SEQUENCE public.social_auth_code_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.social_auth_code_id_seq OWNER TO dj_user_books;
+
+--
+-- Name: social_auth_code_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: dj_user_books
+--
+
+ALTER SEQUENCE public.social_auth_code_id_seq OWNED BY public.social_auth_code.id;
+
+
+--
+-- Name: social_auth_nonce; Type: TABLE; Schema: public; Owner: dj_user_books
+--
+
+CREATE TABLE public.social_auth_nonce (
+    id integer NOT NULL,
+    server_url character varying(255) NOT NULL,
+    "timestamp" integer NOT NULL,
+    salt character varying(65) NOT NULL
+);
+
+
+ALTER TABLE public.social_auth_nonce OWNER TO dj_user_books;
+
+--
+-- Name: social_auth_nonce_id_seq; Type: SEQUENCE; Schema: public; Owner: dj_user_books
+--
+
+CREATE SEQUENCE public.social_auth_nonce_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.social_auth_nonce_id_seq OWNER TO dj_user_books;
+
+--
+-- Name: social_auth_nonce_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: dj_user_books
+--
+
+ALTER SEQUENCE public.social_auth_nonce_id_seq OWNED BY public.social_auth_nonce.id;
+
+
+--
+-- Name: social_auth_partial; Type: TABLE; Schema: public; Owner: dj_user_books
+--
+
+CREATE TABLE public.social_auth_partial (
+    id integer NOT NULL,
+    token character varying(32) NOT NULL,
+    next_step smallint NOT NULL,
+    backend character varying(32) NOT NULL,
+    data text NOT NULL,
+    "timestamp" timestamp with time zone NOT NULL,
+    CONSTRAINT social_auth_partial_next_step_check CHECK ((next_step >= 0))
+);
+
+
+ALTER TABLE public.social_auth_partial OWNER TO dj_user_books;
+
+--
+-- Name: social_auth_partial_id_seq; Type: SEQUENCE; Schema: public; Owner: dj_user_books
+--
+
+CREATE SEQUENCE public.social_auth_partial_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.social_auth_partial_id_seq OWNER TO dj_user_books;
+
+--
+-- Name: social_auth_partial_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: dj_user_books
+--
+
+ALTER SEQUENCE public.social_auth_partial_id_seq OWNED BY public.social_auth_partial.id;
+
+
+--
+-- Name: social_auth_usersocialauth; Type: TABLE; Schema: public; Owner: dj_user_books
+--
+
+CREATE TABLE public.social_auth_usersocialauth (
+    id integer NOT NULL,
+    provider character varying(32) NOT NULL,
+    uid character varying(255) NOT NULL,
+    extra_data text NOT NULL,
+    user_id integer NOT NULL,
+    created timestamp with time zone NOT NULL,
+    modified timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.social_auth_usersocialauth OWNER TO dj_user_books;
+
+--
+-- Name: social_auth_usersocialauth_id_seq; Type: SEQUENCE; Schema: public; Owner: dj_user_books
+--
+
+CREATE SEQUENCE public.social_auth_usersocialauth_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.social_auth_usersocialauth_id_seq OWNER TO dj_user_books;
+
+--
+-- Name: social_auth_usersocialauth_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: dj_user_books
+--
+
+ALTER SEQUENCE public.social_auth_usersocialauth_id_seq OWNED BY public.social_auth_usersocialauth.id;
+
+
+--
+-- Name: store_book; Type: TABLE; Schema: public; Owner: dj_user_books
+--
+
+CREATE TABLE public.store_book (
+    id bigint NOT NULL,
+    name character varying(255) NOT NULL,
+    price numeric(7,2) NOT NULL,
+    author_name character varying(255) NOT NULL,
+    owner_id integer,
+    rating numeric(3,2)
+);
+
+
+ALTER TABLE public.store_book OWNER TO dj_user_books;
+
+--
+-- Name: store_book_id_seq; Type: SEQUENCE; Schema: public; Owner: dj_user_books
+--
+
+CREATE SEQUENCE public.store_book_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.store_book_id_seq OWNER TO dj_user_books;
+
+--
+-- Name: store_book_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: dj_user_books
+--
+
+ALTER SEQUENCE public.store_book_id_seq OWNED BY public.store_book.id;
+
+
+--
+-- Name: store_userbookrelation; Type: TABLE; Schema: public; Owner: dj_user_books
+--
+
+CREATE TABLE public.store_userbookrelation (
+    id bigint NOT NULL,
+    "like" boolean NOT NULL,
+    in_bookmarks boolean NOT NULL,
+    rate smallint,
+    book_id bigint NOT NULL,
+    user_id integer NOT NULL,
+    CONSTRAINT store_userbookrelation_rate_check CHECK ((rate >= 0))
+);
+
+
+ALTER TABLE public.store_userbookrelation OWNER TO dj_user_books;
+
+--
+-- Name: store_userbookrelation_id_seq; Type: SEQUENCE; Schema: public; Owner: dj_user_books
+--
+
+CREATE SEQUENCE public.store_userbookrelation_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.store_userbookrelation_id_seq OWNER TO dj_user_books;
+
+--
+-- Name: store_userbookrelation_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: dj_user_books
+--
+
+ALTER SEQUENCE public.store_userbookrelation_id_seq OWNED BY public.store_userbookrelation.id;
+
+
+--
+-- Name: auth_group id; Type: DEFAULT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.auth_group ALTER COLUMN id SET DEFAULT nextval('public.auth_group_id_seq'::regclass);
+
+
+--
+-- Name: auth_group_permissions id; Type: DEFAULT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.auth_group_permissions ALTER COLUMN id SET DEFAULT nextval('public.auth_group_permissions_id_seq'::regclass);
+
+
+--
+-- Name: auth_permission id; Type: DEFAULT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.auth_permission ALTER COLUMN id SET DEFAULT nextval('public.auth_permission_id_seq'::regclass);
+
+
+--
+-- Name: auth_user id; Type: DEFAULT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.auth_user ALTER COLUMN id SET DEFAULT nextval('public.auth_user_id_seq'::regclass);
+
+
+--
+-- Name: auth_user_groups id; Type: DEFAULT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.auth_user_groups ALTER COLUMN id SET DEFAULT nextval('public.auth_user_groups_id_seq'::regclass);
+
+
+--
+-- Name: auth_user_user_permissions id; Type: DEFAULT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.auth_user_user_permissions ALTER COLUMN id SET DEFAULT nextval('public.auth_user_user_permissions_id_seq'::regclass);
+
+
+--
+-- Name: django_admin_log id; Type: DEFAULT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.django_admin_log ALTER COLUMN id SET DEFAULT nextval('public.django_admin_log_id_seq'::regclass);
+
+
+--
+-- Name: django_content_type id; Type: DEFAULT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.django_content_type ALTER COLUMN id SET DEFAULT nextval('public.django_content_type_id_seq'::regclass);
+
+
+--
+-- Name: django_migrations id; Type: DEFAULT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.django_migrations ALTER COLUMN id SET DEFAULT nextval('public.django_migrations_id_seq'::regclass);
+
+
+--
+-- Name: social_auth_association id; Type: DEFAULT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.social_auth_association ALTER COLUMN id SET DEFAULT nextval('public.social_auth_association_id_seq'::regclass);
+
+
+--
+-- Name: social_auth_code id; Type: DEFAULT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.social_auth_code ALTER COLUMN id SET DEFAULT nextval('public.social_auth_code_id_seq'::regclass);
+
+
+--
+-- Name: social_auth_nonce id; Type: DEFAULT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.social_auth_nonce ALTER COLUMN id SET DEFAULT nextval('public.social_auth_nonce_id_seq'::regclass);
+
+
+--
+-- Name: social_auth_partial id; Type: DEFAULT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.social_auth_partial ALTER COLUMN id SET DEFAULT nextval('public.social_auth_partial_id_seq'::regclass);
+
+
+--
+-- Name: social_auth_usersocialauth id; Type: DEFAULT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.social_auth_usersocialauth ALTER COLUMN id SET DEFAULT nextval('public.social_auth_usersocialauth_id_seq'::regclass);
+
+
+--
+-- Name: store_book id; Type: DEFAULT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.store_book ALTER COLUMN id SET DEFAULT nextval('public.store_book_id_seq'::regclass);
+
+
+--
+-- Name: store_userbookrelation id; Type: DEFAULT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.store_userbookrelation ALTER COLUMN id SET DEFAULT nextval('public.store_userbookrelation_id_seq'::regclass);
+
+
+--
+-- Data for Name: auth_group; Type: TABLE DATA; Schema: public; Owner: dj_user_books
+--
+
+COPY public.auth_group (id, name) FROM stdin;
+\.
+
+
+--
+-- Data for Name: auth_group_permissions; Type: TABLE DATA; Schema: public; Owner: dj_user_books
+--
+
+COPY public.auth_group_permissions (id, group_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: auth_permission; Type: TABLE DATA; Schema: public; Owner: dj_user_books
+--
+
+COPY public.auth_permission (id, name, content_type_id, codename) FROM stdin;
+1	Can add log entry	1	add_logentry
+2	Can change log entry	1	change_logentry
+3	Can delete log entry	1	delete_logentry
+4	Can view log entry	1	view_logentry
+5	Can add permission	2	add_permission
+6	Can change permission	2	change_permission
+7	Can delete permission	2	delete_permission
+8	Can view permission	2	view_permission
+9	Can add group	3	add_group
+10	Can change group	3	change_group
+11	Can delete group	3	delete_group
+12	Can view group	3	view_group
+13	Can add user	4	add_user
+14	Can change user	4	change_user
+15	Can delete user	4	delete_user
+16	Can view user	4	view_user
+17	Can add content type	5	add_contenttype
+18	Can change content type	5	change_contenttype
+19	Can delete content type	5	delete_contenttype
+20	Can view content type	5	view_contenttype
+21	Can add session	6	add_session
+22	Can change session	6	change_session
+23	Can delete session	6	delete_session
+24	Can view session	6	view_session
+25	Can add book	7	add_book
+26	Can change book	7	change_book
+27	Can delete book	7	delete_book
+28	Can view book	7	view_book
+29	Can add association	8	add_association
+30	Can change association	8	change_association
+31	Can delete association	8	delete_association
+32	Can view association	8	view_association
+33	Can add code	9	add_code
+34	Can change code	9	change_code
+35	Can delete code	9	delete_code
+36	Can view code	9	view_code
+37	Can add nonce	10	add_nonce
+38	Can change nonce	10	change_nonce
+39	Can delete nonce	10	delete_nonce
+40	Can view nonce	10	view_nonce
+41	Can add user social auth	11	add_usersocialauth
+42	Can change user social auth	11	change_usersocialauth
+43	Can delete user social auth	11	delete_usersocialauth
+44	Can view user social auth	11	view_usersocialauth
+45	Can add partial	12	add_partial
+46	Can change partial	12	change_partial
+47	Can delete partial	12	delete_partial
+48	Can view partial	12	view_partial
+49	Can add user book relation	13	add_userbookrelation
+50	Can change user book relation	13	change_userbookrelation
+51	Can delete user book relation	13	delete_userbookrelation
+52	Can view user book relation	13	view_userbookrelation
+\.
+
+
+--
+-- Data for Name: auth_user; Type: TABLE DATA; Schema: public; Owner: dj_user_books
+--
+
+COPY public.auth_user (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) FROM stdin;
+1	pbkdf2_sha256$260000$bHrT5swTGKOQs4j7UGX2AN$gbk2uw9hCqF2kHPuRpJime6DYDOP5EMu6Ju7xjeZrik=	2021-08-27 20:18:15.749824+00	t	admin	Илья	Деревенько		t	t	2021-08-23 14:47:45+00
+4	pbkdf2_sha256$260000$m9bfShSG4DQhNqRateSIhm$NOXh8fIjao5ogmbI2Rbpema8TXemVY4zFbHx7q42Dx0=	2021-08-27 20:21:53+00	t	admin111	Антон	Работягов		t	t	2021-08-27 20:21:10+00
+\.
+
+
+--
+-- Data for Name: auth_user_groups; Type: TABLE DATA; Schema: public; Owner: dj_user_books
+--
+
+COPY public.auth_user_groups (id, user_id, group_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: auth_user_user_permissions; Type: TABLE DATA; Schema: public; Owner: dj_user_books
+--
+
+COPY public.auth_user_user_permissions (id, user_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: django_admin_log; Type: TABLE DATA; Schema: public; Owner: dj_user_books
+--
+
+COPY public.django_admin_log (id, action_time, object_id, object_repr, action_flag, change_message, content_type_id, user_id) FROM stdin;
+1	2021-08-23 19:26:11.868349+00	3	Id 3: Мастер и Маргарита	2	[{"changed": {"fields": ["Author name"]}}]	7	1
+2	2021-08-23 19:26:26.384307+00	2	Id 2: Преступление и наказание	2	[{"changed": {"fields": ["Author name"]}}]	7	1
+3	2021-08-23 19:26:52.111495+00	1	Id 1: Война и мир	2	[{"changed": {"fields": ["Author name"]}}]	7	1
+4	2021-08-23 19:32:30.459116+00	4	Id 4: Л. Н. Толстой. Рассказы и сказки	1	[{"added": {}}]	7	1
+5	2021-08-23 19:34:53.776921+00	4	Id 4: Булгаков и Дьявол. Опасные тайны «Мастера и Маргариты»	2	[{"changed": {"fields": ["Name", "Author name"]}}]	7	1
+6	2021-08-24 12:08:46.826653+00	2	ChebuRashkaRF	3		4	1
+7	2021-08-24 12:59:12.124302+00	1	UserBookRelation object (1)	1	[{"added": {}}]	13	1
+8	2021-08-24 13:07:56.345165+00	2	ChebuRashkaRF: Мастер и Маргарита, RATE 4	1	[{"added": {}}]	13	1
+9	2021-08-24 13:08:49.565202+00	1	Id 1: Война и мир	2	[{"changed": {"fields": ["Owner"]}}]	7	1
+10	2021-08-24 13:08:58.946137+00	4	Id 4: Булгаков и Дьявол. Опасные тайны «Мастера и Маргариты»	2	[{"changed": {"fields": ["Owner"]}}]	7	1
+11	2021-08-24 21:45:48.612174+00	3	Id 3: Мастер и Маргарита	2	[{"changed": {"fields": ["Owner"]}}]	7	1
+12	2021-08-24 21:46:03.225454+00	2	Id 2: Преступление и наказание	2	[{"changed": {"fields": ["Owner"]}}]	7	1
+13	2021-08-24 21:56:55.023662+00	3	ChebuRashkaRF	2	[{"changed": {"fields": ["First name", "Last name"]}}]	4	1
+14	2021-08-24 21:57:20.062246+00	1	admin	2	[{"changed": {"fields": ["First name", "Last name"]}}]	4	1
+15	2021-08-24 21:58:44.265898+00	3	admin: Война и мир, RATE 3	1	[{"added": {}}]	13	1
+16	2021-08-27 20:19:27.346422+00	3	ChebuRashkaRF	3		4	1
+17	2021-08-27 20:32:54.043743+00	3	Id 3: Мастер и Маргарита	2	[{"changed": {"fields": ["Owner"]}}]	7	4
+18	2021-08-27 20:33:01.001417+00	2	Id 2: Преступление и наказание	2	[{"changed": {"fields": ["Owner"]}}]	7	4
+19	2021-08-27 20:33:29.613007+00	4	admin111: Преступление и наказание, RATE 3	1	[{"added": {}}]	13	4
+20	2021-08-27 20:33:51.303788+00	5	admin: Преступление и наказание, RATE 5	1	[{"added": {}}]	13	4
+21	2021-08-27 20:34:52.921573+00	4	admin111	2	[{"changed": {"fields": ["First name", "Last name"]}}]	4	4
+\.
+
+
+--
+-- Data for Name: django_content_type; Type: TABLE DATA; Schema: public; Owner: dj_user_books
+--
+
+COPY public.django_content_type (id, app_label, model) FROM stdin;
+1	admin	logentry
+2	auth	permission
+3	auth	group
+4	auth	user
+5	contenttypes	contenttype
+6	sessions	session
+7	store	book
+8	social_django	association
+9	social_django	code
+10	social_django	nonce
+11	social_django	usersocialauth
+12	social_django	partial
+13	store	userbookrelation
+\.
+
+
+--
+-- Data for Name: django_migrations; Type: TABLE DATA; Schema: public; Owner: dj_user_books
+--
+
+COPY public.django_migrations (id, app, name, applied) FROM stdin;
+1	contenttypes	0001_initial	2021-08-23 14:45:40.493832+00
+2	auth	0001_initial	2021-08-23 14:45:40.607591+00
+3	admin	0001_initial	2021-08-23 14:45:40.636654+00
+4	admin	0002_logentry_remove_auto_add	2021-08-23 14:45:40.648649+00
+5	admin	0003_logentry_add_action_flag_choices	2021-08-23 14:45:40.658877+00
+6	contenttypes	0002_remove_content_type_name	2021-08-23 14:45:40.680885+00
+7	auth	0002_alter_permission_name_max_length	2021-08-23 14:45:40.694656+00
+8	auth	0003_alter_user_email_max_length	2021-08-23 14:45:40.706169+00
+9	auth	0004_alter_user_username_opts	2021-08-23 14:45:40.716098+00
+10	auth	0005_alter_user_last_login_null	2021-08-23 14:45:40.725924+00
+11	auth	0006_require_contenttypes_0002	2021-08-23 14:45:40.729977+00
+12	auth	0007_alter_validators_add_error_messages	2021-08-23 14:45:40.740304+00
+13	auth	0008_alter_user_username_max_length	2021-08-23 14:45:40.755915+00
+14	auth	0009_alter_user_last_name_max_length	2021-08-23 14:45:40.772517+00
+15	auth	0010_alter_group_name_max_length	2021-08-23 14:45:40.789211+00
+16	auth	0011_update_proxy_permissions	2021-08-23 14:45:40.80202+00
+17	auth	0012_alter_user_first_name_max_length	2021-08-23 14:45:40.812019+00
+18	sessions	0001_initial	2021-08-23 14:45:40.826856+00
+19	store	0001_initial	2021-08-23 14:52:30.109173+00
+20	store	0002_book_author_name	2021-08-23 19:25:15.877508+00
+21	default	0001_initial	2021-08-23 20:28:23.580993+00
+22	social_auth	0001_initial	2021-08-23 20:28:23.609321+00
+23	default	0002_add_related_name	2021-08-23 20:28:23.625342+00
+24	social_auth	0002_add_related_name	2021-08-23 20:28:23.627712+00
+25	default	0003_alter_email_max_length	2021-08-23 20:28:23.689149+00
+26	social_auth	0003_alter_email_max_length	2021-08-23 20:28:23.690852+00
+27	default	0004_auto_20160423_0400	2021-08-23 20:28:23.707809+00
+28	social_auth	0004_auto_20160423_0400	2021-08-23 20:28:23.708804+00
+29	social_auth	0005_auto_20160727_2333	2021-08-23 20:28:23.735862+00
+30	social_django	0006_partial	2021-08-23 20:28:23.77642+00
+31	social_django	0007_code_timestamp	2021-08-23 20:28:23.811386+00
+32	social_django	0008_partial_timestamp	2021-08-23 20:28:23.84592+00
+33	social_django	0009_auto_20191118_0520	2021-08-23 20:28:23.885515+00
+34	social_django	0010_uid_db_index	2021-08-23 20:28:23.939072+00
+35	social_django	0003_alter_email_max_length	2021-08-23 20:28:23.953262+00
+36	social_django	0004_auto_20160423_0400	2021-08-23 20:28:23.957994+00
+37	social_django	0005_auto_20160727_2333	2021-08-23 20:28:23.962513+00
+38	social_django	0001_initial	2021-08-23 20:28:23.973374+00
+39	social_django	0002_add_related_name	2021-08-23 20:28:23.9767+00
+40	store	0003_book_owner	2021-08-24 12:01:07.443742+00
+41	store	0004_userbookrelation	2021-08-24 12:57:19.550443+00
+42	store	0005_auto_20210824_1307	2021-08-24 13:07:26.45691+00
+43	store	0006_alter_userbookrelation_rate	2021-08-24 13:51:46.147127+00
+44	store	0007_book_rating	2021-08-25 12:42:09.308448+00
+45	store	0008_alter_book_rating	2021-08-27 20:32:37.578986+00
+\.
+
+
+--
+-- Data for Name: django_session; Type: TABLE DATA; Schema: public; Owner: dj_user_books
+--
+
+COPY public.django_session (session_key, session_data, expire_date) FROM stdin;
+\.
+
+
+--
+-- Data for Name: social_auth_association; Type: TABLE DATA; Schema: public; Owner: dj_user_books
+--
+
+COPY public.social_auth_association (id, server_url, handle, secret, issued, lifetime, assoc_type) FROM stdin;
+\.
+
+
+--
+-- Data for Name: social_auth_code; Type: TABLE DATA; Schema: public; Owner: dj_user_books
+--
+
+COPY public.social_auth_code (id, email, code, verified, "timestamp") FROM stdin;
+\.
+
+
+--
+-- Data for Name: social_auth_nonce; Type: TABLE DATA; Schema: public; Owner: dj_user_books
+--
+
+COPY public.social_auth_nonce (id, server_url, "timestamp", salt) FROM stdin;
+\.
+
+
+--
+-- Data for Name: social_auth_partial; Type: TABLE DATA; Schema: public; Owner: dj_user_books
+--
+
+COPY public.social_auth_partial (id, token, next_step, backend, data, "timestamp") FROM stdin;
+\.
+
+
+--
+-- Data for Name: social_auth_usersocialauth; Type: TABLE DATA; Schema: public; Owner: dj_user_books
+--
+
+COPY public.social_auth_usersocialauth (id, provider, uid, extra_data, user_id, created, modified) FROM stdin;
+\.
+
+
+--
+-- Data for Name: store_book; Type: TABLE DATA; Schema: public; Owner: dj_user_books
+--
+
+COPY public.store_book (id, name, price, author_name, owner_id, rating) FROM stdin;
+1	Война и мир	1000.00	Лев Толстой	1	\N
+4	Булгаков и Дьявол. Опасные тайны «Мастера и Маргариты»	300.00	Анатолий Абрашкин	1	\N
+3	Мастер и Маргарита	500.00	Михаил Булгаков	4	\N
+2	Преступление и наказание	1000.00	Фёдор Достоевский	4	4.00
+\.
+
+
+--
+-- Data for Name: store_userbookrelation; Type: TABLE DATA; Schema: public; Owner: dj_user_books
+--
+
+COPY public.store_userbookrelation (id, "like", in_bookmarks, rate, book_id, user_id) FROM stdin;
+3	t	f	3	1	1
+4	t	f	3	2	4
+5	t	f	5	2	1
+\.
+
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE SET; Schema: public; Owner: dj_user_books
+--
+
+SELECT pg_catalog.setval('public.auth_group_id_seq', 1, false);
+
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: dj_user_books
+--
+
+SELECT pg_catalog.setval('public.auth_group_permissions_id_seq', 1, false);
+
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: dj_user_books
+--
+
+SELECT pg_catalog.setval('public.auth_permission_id_seq', 52, true);
+
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: dj_user_books
+--
+
+SELECT pg_catalog.setval('public.auth_user_groups_id_seq', 1, false);
+
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: dj_user_books
+--
+
+SELECT pg_catalog.setval('public.auth_user_id_seq', 4, true);
+
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: dj_user_books
+--
+
+SELECT pg_catalog.setval('public.auth_user_user_permissions_id_seq', 1, false);
+
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: dj_user_books
+--
+
+SELECT pg_catalog.setval('public.django_admin_log_id_seq', 21, true);
+
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: dj_user_books
+--
+
+SELECT pg_catalog.setval('public.django_content_type_id_seq', 13, true);
+
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: dj_user_books
+--
+
+SELECT pg_catalog.setval('public.django_migrations_id_seq', 45, true);
+
+
+--
+-- Name: social_auth_association_id_seq; Type: SEQUENCE SET; Schema: public; Owner: dj_user_books
+--
+
+SELECT pg_catalog.setval('public.social_auth_association_id_seq', 1, false);
+
+
+--
+-- Name: social_auth_code_id_seq; Type: SEQUENCE SET; Schema: public; Owner: dj_user_books
+--
+
+SELECT pg_catalog.setval('public.social_auth_code_id_seq', 1, false);
+
+
+--
+-- Name: social_auth_nonce_id_seq; Type: SEQUENCE SET; Schema: public; Owner: dj_user_books
+--
+
+SELECT pg_catalog.setval('public.social_auth_nonce_id_seq', 1, false);
+
+
+--
+-- Name: social_auth_partial_id_seq; Type: SEQUENCE SET; Schema: public; Owner: dj_user_books
+--
+
+SELECT pg_catalog.setval('public.social_auth_partial_id_seq', 1, false);
+
+
+--
+-- Name: social_auth_usersocialauth_id_seq; Type: SEQUENCE SET; Schema: public; Owner: dj_user_books
+--
+
+SELECT pg_catalog.setval('public.social_auth_usersocialauth_id_seq', 2, true);
+
+
+--
+-- Name: store_book_id_seq; Type: SEQUENCE SET; Schema: public; Owner: dj_user_books
+--
+
+SELECT pg_catalog.setval('public.store_book_id_seq', 4, true);
+
+
+--
+-- Name: store_userbookrelation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: dj_user_books
+--
+
+SELECT pg_catalog.setval('public.store_userbookrelation_id_seq', 5, true);
+
+
+--
+-- Name: auth_group auth_group_name_key; Type: CONSTRAINT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.auth_group
+    ADD CONSTRAINT auth_group_name_key UNIQUE (name);
+
+
+--
+-- Name: auth_group_permissions auth_group_permissions_group_id_permission_id_0cd325b0_uniq; Type: CONSTRAINT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_permission_id_0cd325b0_uniq UNIQUE (group_id, permission_id);
+
+
+--
+-- Name: auth_group_permissions auth_group_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_group auth_group_pkey; Type: CONSTRAINT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.auth_group
+    ADD CONSTRAINT auth_group_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_permission auth_permission_content_type_id_codename_01ab375a_uniq; Type: CONSTRAINT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_codename_01ab375a_uniq UNIQUE (content_type_id, codename);
+
+
+--
+-- Name: auth_permission auth_permission_pkey; Type: CONSTRAINT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_groups auth_user_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.auth_user_groups
+    ADD CONSTRAINT auth_user_groups_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_groups auth_user_groups_user_id_group_id_94350c0c_uniq; Type: CONSTRAINT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.auth_user_groups
+    ADD CONSTRAINT auth_user_groups_user_id_group_id_94350c0c_uniq UNIQUE (user_id, group_id);
+
+
+--
+-- Name: auth_user auth_user_pkey; Type: CONSTRAINT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.auth_user
+    ADD CONSTRAINT auth_user_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_user_permissions auth_user_user_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_user_permissions auth_user_user_permissions_user_id_permission_id_14a6b632_uniq; Type: CONSTRAINT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_user_id_permission_id_14a6b632_uniq UNIQUE (user_id, permission_id);
+
+
+--
+-- Name: auth_user auth_user_username_key; Type: CONSTRAINT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.auth_user
+    ADD CONSTRAINT auth_user_username_key UNIQUE (username);
+
+
+--
+-- Name: django_admin_log django_admin_log_pkey; Type: CONSTRAINT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_content_type django_content_type_app_label_model_76bd3d3b_uniq; Type: CONSTRAINT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.django_content_type
+    ADD CONSTRAINT django_content_type_app_label_model_76bd3d3b_uniq UNIQUE (app_label, model);
+
+
+--
+-- Name: django_content_type django_content_type_pkey; Type: CONSTRAINT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.django_content_type
+    ADD CONSTRAINT django_content_type_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_migrations django_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.django_migrations
+    ADD CONSTRAINT django_migrations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_session django_session_pkey; Type: CONSTRAINT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.django_session
+    ADD CONSTRAINT django_session_pkey PRIMARY KEY (session_key);
+
+
+--
+-- Name: social_auth_association social_auth_association_pkey; Type: CONSTRAINT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.social_auth_association
+    ADD CONSTRAINT social_auth_association_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: social_auth_association social_auth_association_server_url_handle_078befa2_uniq; Type: CONSTRAINT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.social_auth_association
+    ADD CONSTRAINT social_auth_association_server_url_handle_078befa2_uniq UNIQUE (server_url, handle);
+
+
+--
+-- Name: social_auth_code social_auth_code_email_code_801b2d02_uniq; Type: CONSTRAINT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.social_auth_code
+    ADD CONSTRAINT social_auth_code_email_code_801b2d02_uniq UNIQUE (email, code);
+
+
+--
+-- Name: social_auth_code social_auth_code_pkey; Type: CONSTRAINT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.social_auth_code
+    ADD CONSTRAINT social_auth_code_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: social_auth_nonce social_auth_nonce_pkey; Type: CONSTRAINT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.social_auth_nonce
+    ADD CONSTRAINT social_auth_nonce_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: social_auth_nonce social_auth_nonce_server_url_timestamp_salt_f6284463_uniq; Type: CONSTRAINT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.social_auth_nonce
+    ADD CONSTRAINT social_auth_nonce_server_url_timestamp_salt_f6284463_uniq UNIQUE (server_url, "timestamp", salt);
+
+
+--
+-- Name: social_auth_partial social_auth_partial_pkey; Type: CONSTRAINT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.social_auth_partial
+    ADD CONSTRAINT social_auth_partial_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: social_auth_usersocialauth social_auth_usersocialauth_pkey; Type: CONSTRAINT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.social_auth_usersocialauth
+    ADD CONSTRAINT social_auth_usersocialauth_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: social_auth_usersocialauth social_auth_usersocialauth_provider_uid_e6b5e668_uniq; Type: CONSTRAINT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.social_auth_usersocialauth
+    ADD CONSTRAINT social_auth_usersocialauth_provider_uid_e6b5e668_uniq UNIQUE (provider, uid);
+
+
+--
+-- Name: store_book store_book_pkey; Type: CONSTRAINT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.store_book
+    ADD CONSTRAINT store_book_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: store_userbookrelation store_userbookrelation_pkey; Type: CONSTRAINT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.store_userbookrelation
+    ADD CONSTRAINT store_userbookrelation_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_group_name_a6ea08ec_like; Type: INDEX; Schema: public; Owner: dj_user_books
+--
+
+CREATE INDEX auth_group_name_a6ea08ec_like ON public.auth_group USING btree (name varchar_pattern_ops);
+
+
+--
+-- Name: auth_group_permissions_group_id_b120cbf9; Type: INDEX; Schema: public; Owner: dj_user_books
+--
+
+CREATE INDEX auth_group_permissions_group_id_b120cbf9 ON public.auth_group_permissions USING btree (group_id);
+
+
+--
+-- Name: auth_group_permissions_permission_id_84c5c92e; Type: INDEX; Schema: public; Owner: dj_user_books
+--
+
+CREATE INDEX auth_group_permissions_permission_id_84c5c92e ON public.auth_group_permissions USING btree (permission_id);
+
+
+--
+-- Name: auth_permission_content_type_id_2f476e4b; Type: INDEX; Schema: public; Owner: dj_user_books
+--
+
+CREATE INDEX auth_permission_content_type_id_2f476e4b ON public.auth_permission USING btree (content_type_id);
+
+
+--
+-- Name: auth_user_groups_group_id_97559544; Type: INDEX; Schema: public; Owner: dj_user_books
+--
+
+CREATE INDEX auth_user_groups_group_id_97559544 ON public.auth_user_groups USING btree (group_id);
+
+
+--
+-- Name: auth_user_groups_user_id_6a12ed8b; Type: INDEX; Schema: public; Owner: dj_user_books
+--
+
+CREATE INDEX auth_user_groups_user_id_6a12ed8b ON public.auth_user_groups USING btree (user_id);
+
+
+--
+-- Name: auth_user_user_permissions_permission_id_1fbb5f2c; Type: INDEX; Schema: public; Owner: dj_user_books
+--
+
+CREATE INDEX auth_user_user_permissions_permission_id_1fbb5f2c ON public.auth_user_user_permissions USING btree (permission_id);
+
+
+--
+-- Name: auth_user_user_permissions_user_id_a95ead1b; Type: INDEX; Schema: public; Owner: dj_user_books
+--
+
+CREATE INDEX auth_user_user_permissions_user_id_a95ead1b ON public.auth_user_user_permissions USING btree (user_id);
+
+
+--
+-- Name: auth_user_username_6821ab7c_like; Type: INDEX; Schema: public; Owner: dj_user_books
+--
+
+CREATE INDEX auth_user_username_6821ab7c_like ON public.auth_user USING btree (username varchar_pattern_ops);
+
+
+--
+-- Name: django_admin_log_content_type_id_c4bce8eb; Type: INDEX; Schema: public; Owner: dj_user_books
+--
+
+CREATE INDEX django_admin_log_content_type_id_c4bce8eb ON public.django_admin_log USING btree (content_type_id);
+
+
+--
+-- Name: django_admin_log_user_id_c564eba6; Type: INDEX; Schema: public; Owner: dj_user_books
+--
+
+CREATE INDEX django_admin_log_user_id_c564eba6 ON public.django_admin_log USING btree (user_id);
+
+
+--
+-- Name: django_session_expire_date_a5c62663; Type: INDEX; Schema: public; Owner: dj_user_books
+--
+
+CREATE INDEX django_session_expire_date_a5c62663 ON public.django_session USING btree (expire_date);
+
+
+--
+-- Name: django_session_session_key_c0390e0f_like; Type: INDEX; Schema: public; Owner: dj_user_books
+--
+
+CREATE INDEX django_session_session_key_c0390e0f_like ON public.django_session USING btree (session_key varchar_pattern_ops);
+
+
+--
+-- Name: social_auth_code_code_a2393167; Type: INDEX; Schema: public; Owner: dj_user_books
+--
+
+CREATE INDEX social_auth_code_code_a2393167 ON public.social_auth_code USING btree (code);
+
+
+--
+-- Name: social_auth_code_code_a2393167_like; Type: INDEX; Schema: public; Owner: dj_user_books
+--
+
+CREATE INDEX social_auth_code_code_a2393167_like ON public.social_auth_code USING btree (code varchar_pattern_ops);
+
+
+--
+-- Name: social_auth_code_timestamp_176b341f; Type: INDEX; Schema: public; Owner: dj_user_books
+--
+
+CREATE INDEX social_auth_code_timestamp_176b341f ON public.social_auth_code USING btree ("timestamp");
+
+
+--
+-- Name: social_auth_partial_timestamp_50f2119f; Type: INDEX; Schema: public; Owner: dj_user_books
+--
+
+CREATE INDEX social_auth_partial_timestamp_50f2119f ON public.social_auth_partial USING btree ("timestamp");
+
+
+--
+-- Name: social_auth_partial_token_3017fea3; Type: INDEX; Schema: public; Owner: dj_user_books
+--
+
+CREATE INDEX social_auth_partial_token_3017fea3 ON public.social_auth_partial USING btree (token);
+
+
+--
+-- Name: social_auth_partial_token_3017fea3_like; Type: INDEX; Schema: public; Owner: dj_user_books
+--
+
+CREATE INDEX social_auth_partial_token_3017fea3_like ON public.social_auth_partial USING btree (token varchar_pattern_ops);
+
+
+--
+-- Name: social_auth_usersocialauth_uid_796e51dc; Type: INDEX; Schema: public; Owner: dj_user_books
+--
+
+CREATE INDEX social_auth_usersocialauth_uid_796e51dc ON public.social_auth_usersocialauth USING btree (uid);
+
+
+--
+-- Name: social_auth_usersocialauth_uid_796e51dc_like; Type: INDEX; Schema: public; Owner: dj_user_books
+--
+
+CREATE INDEX social_auth_usersocialauth_uid_796e51dc_like ON public.social_auth_usersocialauth USING btree (uid varchar_pattern_ops);
+
+
+--
+-- Name: social_auth_usersocialauth_user_id_17d28448; Type: INDEX; Schema: public; Owner: dj_user_books
+--
+
+CREATE INDEX social_auth_usersocialauth_user_id_17d28448 ON public.social_auth_usersocialauth USING btree (user_id);
+
+
+--
+-- Name: store_book_owner_id_be2d9590; Type: INDEX; Schema: public; Owner: dj_user_books
+--
+
+CREATE INDEX store_book_owner_id_be2d9590 ON public.store_book USING btree (owner_id);
+
+
+--
+-- Name: store_userbookrelation_book_id_9ed2b049; Type: INDEX; Schema: public; Owner: dj_user_books
+--
+
+CREATE INDEX store_userbookrelation_book_id_9ed2b049 ON public.store_userbookrelation USING btree (book_id);
+
+
+--
+-- Name: store_userbookrelation_user_id_01d6aaf9; Type: INDEX; Schema: public; Owner: dj_user_books
+--
+
+CREATE INDEX store_userbookrelation_user_id_01d6aaf9 ON public.store_userbookrelation USING btree (user_id);
+
+
+--
+-- Name: auth_group_permissions auth_group_permissio_permission_id_84c5c92e_fk_auth_perm; Type: FK CONSTRAINT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissio_permission_id_84c5c92e_fk_auth_perm FOREIGN KEY (permission_id) REFERENCES public.auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_group_permissions auth_group_permissions_group_id_b120cbf9_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_b120cbf9_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES public.auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_permission auth_permission_content_type_id_2f476e4b_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_2f476e4b_fk_django_co FOREIGN KEY (content_type_id) REFERENCES public.django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_groups auth_user_groups_group_id_97559544_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.auth_user_groups
+    ADD CONSTRAINT auth_user_groups_group_id_97559544_fk_auth_group_id FOREIGN KEY (group_id) REFERENCES public.auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_groups auth_user_groups_user_id_6a12ed8b_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.auth_user_groups
+    ADD CONSTRAINT auth_user_groups_user_id_6a12ed8b_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_user_permissions auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm; Type: FK CONSTRAINT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm FOREIGN KEY (permission_id) REFERENCES public.auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_user_permissions auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_admin_log django_admin_log_content_type_id_c4bce8eb_fk_django_co; Type: FK CONSTRAINT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_content_type_id_c4bce8eb_fk_django_co FOREIGN KEY (content_type_id) REFERENCES public.django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_admin_log django_admin_log_user_id_c564eba6_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.django_admin_log
+    ADD CONSTRAINT django_admin_log_user_id_c564eba6_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: social_auth_usersocialauth social_auth_usersocialauth_user_id_17d28448_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.social_auth_usersocialauth
+    ADD CONSTRAINT social_auth_usersocialauth_user_id_17d28448_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: store_book store_book_owner_id_be2d9590_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.store_book
+    ADD CONSTRAINT store_book_owner_id_be2d9590_fk_auth_user_id FOREIGN KEY (owner_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: store_userbookrelation store_userbookrelation_book_id_9ed2b049_fk_store_book_id; Type: FK CONSTRAINT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.store_userbookrelation
+    ADD CONSTRAINT store_userbookrelation_book_id_9ed2b049_fk_store_book_id FOREIGN KEY (book_id) REFERENCES public.store_book(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: store_userbookrelation store_userbookrelation_user_id_01d6aaf9_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: dj_user_books
+--
+
+ALTER TABLE ONLY public.store_userbookrelation
+    ADD CONSTRAINT store_userbookrelation_user_id_01d6aaf9_fk_auth_user_id FOREIGN KEY (user_id) REFERENCES public.auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- PostgreSQL database dump complete
+--
+

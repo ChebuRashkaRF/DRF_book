@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  web:
+      build: .
+      image: drf_book:tag_drf_book
+      volumes:
+          - .:/app/drf_book
+      ports:
+          - "8000:8000"
+      env_file:
+          - ./.env.dev
+      command: bash -c "python3 manage.py runserver 0.0.0.0:8000"
+      depends_on:
+          - db
+
+  db:
+      container_name: db_book
+      image: postgres:12.0-alpine
+      volumes:
+         - postgres_data:/var/lib/postgresql/data/
+      environment:
+         - POSTGRES_USER=dj_user_books
+         - POSTGRES_PASSWORD=123456
+         - POSTGRES_DB=dj_books
+
+volumes:
+  postgres_data:
